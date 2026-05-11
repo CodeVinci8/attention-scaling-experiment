@@ -92,3 +92,43 @@ def plot_entropy_vs_dk(df: pd.DataFrame) -> None:
     plt.tight_layout()
     plt.savefig(os.path.join(OUTPUT_DIR, "fig4_extra_entropy_vs_dk.png"), dpi=300)
     plt.close()
+
+
+def plot_loss_comparison(
+    history_scaled: pd.DataFrame,
+    history_unscaled: pd.DataFrame,
+    loss_column: str,
+    ylabel: str,
+    title: str,
+    filename: str,
+) -> None:
+    """
+    Строит сравнение loss для scaled и unscaled Transformer.
+    """
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+    plt.figure(figsize=(7, 5))
+
+    plt.plot(
+        history_scaled["iter"],
+        history_scaled[loss_column],
+        marker="o",
+        label="scaled attention",
+    )
+
+    plt.plot(
+        history_unscaled["iter"],
+        history_unscaled[loss_column],
+        marker="o",
+        label="unscaled attention",
+    )
+
+    plt.xlabel("iteration")
+    plt.ylabel(ylabel)
+    plt.title(title)
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+
+    plt.tight_layout()
+    plt.savefig(os.path.join(OUTPUT_DIR, filename), dpi=300)
+    plt.close()

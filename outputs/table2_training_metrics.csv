@@ -1,0 +1,3 @@
+model,scaling,final_train_loss,final_validation_loss,comment
+Transformer со scaled attention,да,2.4131550788879395,2.40857173204422,обучение завершено
+Transformer без scaling,нет,2.386779177188873,2.383050286769867,обучение завершено
